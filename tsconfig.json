@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "ES2023"
+    ],
+    "baseUrl": "./",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "paths": {
+      "unocss-preset-fluid": ["./src/main.ts"]
+    },
+    "types": [
+      "node"
+    ],
+    "strict": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

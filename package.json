@@ -1,0 +1,53 @@
+{
+  "name": "unocss-preset-fluid",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A fluid preset for unocss",
+  "author": "Renato <renatomoor1@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renatomoor/unocss-preset-fluid"
+  },
+  "keywords": [
+    "unocss",
+    "unocss-preset",
+    "unocss-preset-fluid"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "tsc && vite build && api-extractor run",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "vue": "^3.3.8"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^1.1.0",
+    "@microsoft/api-extractor": "^7.38.3",
+    "@release-it/conventional-changelog": "^8.0.1",
+    "@types/node": "^20.9.0",
+    "eslint": "^8.53.0",
+    "release-it": "^17.0.0",
+    "typescript": "^5.2.2",
+    "unocss": "^0.57.3",
+    "vite": "^4.5.0",
+    "vitepress": "1.0.0-rc.25"
+  }
+}
