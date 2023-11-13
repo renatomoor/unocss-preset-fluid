@@ -28,7 +28,7 @@
 ## Margin
 
 <div class="f-m-32-64 bg-green-100/10 rounded">
-    Padding
+    Margin
 </div>
 
 ```html
