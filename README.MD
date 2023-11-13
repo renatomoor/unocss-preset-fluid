@@ -2,6 +2,7 @@
 Elegantly scale type and space without breakpoints.  
 A fluid fonts and spaces utilites for unocss inspired by [Utopia](https://utopia.fyi/).
 
+
 ## Installation
 ```bash
 npm i unocss-preset-fluid unocss --save-dev # with npm
@@ -23,6 +24,10 @@ export default defineConfig({
   ],
 })
 ```
+
+### Examples and Documentation
+[Homepage](https://renatomoor.github.io/unocss-preset-fluid)  
+[Examples](https://renatomoor.github.io/unocss-preset-fluid/examples.html)
 
 ### Options
 
