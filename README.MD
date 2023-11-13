@@ -78,16 +78,16 @@ For example
 | `f-mt`        | `f-mt-32-64`        | margin top                                   |
 | `f-mr`        | `f-mr-32-64`        | margin right                                 |
 | `f-mb`        | `f-mb-32-64`        | margin bottom                                |
-| `f-ml`        | `f-mb-32-64`        | margin left                                  |
-| `f-mx`        | `f-mb-32-64`        | margin left and margin right                 |
-| `f-my`        | `f-mb-32-64`        | margin top and margin bottom                 |
+| `f-ml`        | `f-ml-32-64`        | margin left                                  |
+| `f-mx`        | `f-mx-32-64`        | margin left and margin right                 |
+| `f-my`        | `f-my-32-64`        | margin top and margin bottom                 |
 | `f-p`         | `f-p-32-64`         | padding                                      |
 | `f-pt`        | `f-pt-32-64`        | padding top                                  |
 | `f-pr`        | `f-pr-32-64`        | padding right                                |
 | `f-pb`        | `f-pb-32-64`        | padding bottom                               |
-| `f-pl`        | `f-pb-32-64`        | padding left                                 |
-| `f-px`        | `f-pb-32-64`        | padding left and padding right               |
-| `f-py`        | `f-pb-32-64`        | padding top and padding bottom               |
+| `f-pl`        | `f-pl-32-64`        | padding left                                 |
+| `f-px`        | `f-px-32-64`        | padding left and padding right               |
+| `f-py`        | `f-py-32-64`        | padding top and padding bottom               |
 | `f-w`         | `f-w-32-64`         | width                                        |
 | `f-min-w`     | `f-min-w-32-64`     | min-width                                    |
 | `f-max-w`     | `f-max-w-32-64`     | max-width                                    |
