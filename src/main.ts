@@ -10,7 +10,7 @@ export interface PresetFluidOptions {
   /**
    * Min width in pixels where the fluid layout starts keeping the proportions of the minWidth.
    */
-  extendMinWidth?: number
+  extendMinWidth?: number | null
   /**
    * Max width in pixels where the fluid layout ends.
    * @default 1440
@@ -19,7 +19,7 @@ export interface PresetFluidOptions {
   /**
    * Max width in pixels where the fluid layout ends keeping the proportions of the maxWidth.
    */
-  extendMaxWidth?: number
+  extendMaxWidth?: number | null
   /**
    * Base font size in pixels.
    * @default 16
