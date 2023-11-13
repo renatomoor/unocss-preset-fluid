@@ -138,10 +138,10 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     return [new RegExp(`${name}-(\\d+)-(\\d+)`), (match, { rawSelector }) => {
       const { min, max } = getRemMinMax(match)
       const selector = e(rawSelector)
-      const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)}`).join('\n')
+      const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)};`).join('\n')
       return `
         .${selector} {
-          ${cssProperties};
+          ${cssProperties}
         }`
     }]
   }
