@@ -3,7 +3,7 @@
 
 ## Typography
 <span class="f-text-32-64 leading-[120%] text-amber-500 font-mono">
-    This is an example of a text with a font size of 16px and a line height of 32px.
+    This is an example of a text with a font size from 16px to 32px.
 </span>
 
 ```html
