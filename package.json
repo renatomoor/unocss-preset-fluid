@@ -3,12 +3,13 @@
   "type": "module",
   "version": "0.0.3",
   "description": "A fluid preset for unocss",
-  "author": "Renato <renatomoor1@gmail.com>",
+  "author": "Renato Moor <renatomoor1@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/renatomoor/unocss-preset-fluid"
   },
+  "homepage": "https://renatomoor.github.io/unocss-preset-fluid/",
   "keywords": [
     "unocss",
     "unocss-preset",
