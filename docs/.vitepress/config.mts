@@ -23,7 +23,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/renatomoor/unocss-preset-fluid' },
     ],
   },
   base: '/unocss-preset-fluid/',
