@@ -1,7 +1,7 @@
 {
   "name": "unocss-preset-fluid",
   "type": "module",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A fluid preset for unocss",
   "author": "Renato Moor <renatomoor1@gmail.com>",
   "license": "MIT",
