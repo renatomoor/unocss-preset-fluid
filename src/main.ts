@@ -1,6 +1,10 @@
 import type { Preset } from 'unocss'
 import { e } from 'unocss'
 
+export interface FluidRanges {
+  [key: string]: [number, number]
+}
+
 export interface PresetFluidOptions {
   /**
    * Min width in pixels where the fluid layout starts.
@@ -30,6 +34,11 @@ export interface PresetFluidOptions {
    * @default false
    */
   useRemByDefault?: boolean
+  /**
+   * A preset with predefined ranges of fluid spacing
+   * @default undefined;
+   */
+  fluidRanges?: FluidRanges | null
 }
 
 const defaultOptions: Required<PresetFluidOptions> = {
@@ -39,7 +48,9 @@ const defaultOptions: Required<PresetFluidOptions> = {
   useRemByDefault: false,
   extendMaxWidth: null,
   extendMinWidth: null,
+  fluidRanges: null
 }
+
 export function presetFluid(options?: PresetFluidOptions): Preset {
   const config = Object.assign({}, defaultOptions, options)
 
@@ -92,9 +103,17 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   /**
    * Returns the min and max values in rem for the given match.
    */
-  function getRemMinMax(match: RegExpMatchArray) {
-    const min = getRemMin(Number.parseInt(match[1]))
-    const max = getRemMax(Number.parseInt(match[2]))
+  function getRemMinMax(match: RegExpMatchArray | string) {
+    let min, max
+
+    if(typeof match === 'string'){
+      min = config.fluidRanges[match][0]
+      max = config.fluidRanges[match][1]
+    } else {
+      min = getRemMin(Number.parseInt(match[1]))
+      max = getRemMax(Number.parseInt(match[2]))
+    }
+
     let relativeMin: number | undefined
     let relativemax: number | undefined
     if (config.extendMinWidth)
@@ -122,28 +141,64 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     return slope * (newViewPortSize - originalViewPortMin) + originalMinSize
   }
 
-  function buildFluidUtility(name: string, property: string) {
-    return [new RegExp(`${name}-(\\d+)-(\\d+)`), (match, { rawSelector }) => {
-      const { min, max } = getRemMinMax(match)
-      const selector = e(rawSelector)
-      const cssProperty = `${property}: ${getClamp(min, max)}`
-      return `
-        .${selector} {
-          ${cssProperty};
-        }`
-    }]
+  function buildFlexibleFluidUtility(name: string, property: string) {
+    return [
+      new RegExp(`${name}-(\\d+)-(\\d+)`), 
+      (match, { rawSelector }) => {
+        const { min, max } = getRemMinMax(match)
+        const selector = e(rawSelector)
+        const cssProperty = `${property}: ${getClamp(min, max)}`
+        return `
+          .${selector} {
+            ${cssProperty};
+          }`
+      },
+    ]
   }
 
-  function buildFluidUtilityWithManyProperties(name: string, properties: string[]): any {
-    return [new RegExp(`${name}-(\\d+)-(\\d+)`), (match, { rawSelector }) => {
-      const { min, max } = getRemMinMax(match)
-      const selector = e(rawSelector)
-      const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)};`).join('\n')
-      return `
-        .${selector} {
-          ${cssProperties}
-        }`
-    }]
+  function buildFlexibleFluidUtilityWithManyProperties(name: string, properties: string[]): any {
+    return [
+      new RegExp(`${name}-(\\d+)-(\\d+)`), 
+      (match, { rawSelector }) => {
+        const { min, max } = getRemMinMax(match)
+        const selector = e(rawSelector)
+        const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)};`).join('\n')
+        return `
+          .${selector} {
+            ${cssProperties}
+          }`
+      },
+    ]
+  }
+
+  function buildPredefinedFluidUtility(name: string, property: string, fluidRangeKey: string) {
+    return [
+      new RegExp(`${name}-${fluidRangeKey}`), 
+      (_, { rawSelector }) => {
+        const { min, max } = getRemMinMax(fluidRangeKey)
+        const selector = e(rawSelector)
+        const cssProperty = `${property}: ${getClamp(min, max)}`
+        return `
+          .${selector} {
+            ${cssProperty};
+          }`
+      },
+    ]
+  }
+
+  function buildPredefinedFluidUtilityWithManyProperties(name: string, properties: string[], fluidRangeKey: string): any {
+    return [
+      new RegExp(`${name}-${fluidRangeKey}`), 
+      (_, { rawSelector }) => {
+        const { min, max } = getRemMinMax(fluidRangeKey)
+        const selector = e(rawSelector)
+        const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)};`).join('\n')
+        return `
+          .${selector} {
+            ${cssProperties}
+          }`
+      },
+    ]
   }
 
   const fluidUtilities = {
@@ -191,20 +246,44 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     'f-leading': 'line-height',
   }
 
-  function buildUtilities() {
+  function buildFlexibleUtilities() {
     const utilities = Object.entries(fluidUtilities).flatMap(([name, property]) => {
       if (Array.isArray(property))
-        return [buildFluidUtilityWithManyProperties(name, property)]
+        return [buildFlexibleFluidUtilityWithManyProperties(name, property)]
       else
-        return [buildFluidUtility(name, property)]
+        return [buildFlexibleFluidUtility(name, property)]
     })
     return utilities
   }
 
+  function buildPredefinedUtilities() {
+    if(config.fluidRanges){
+      const utilities = Object.entries(fluidUtilities).flatMap(([name, property]) => {
+        const keys = Object.keys(config.fluidRanges)
+        for (let i = 0; i < keys.length; i++) {
+          const fluidRangeKey = keys[i];
+          
+          if (Array.isArray(property))
+            return [buildPredefinedFluidUtilityWithManyProperties(name, property, fluidRangeKey)]
+          else
+            return [buildPredefinedFluidUtility(name, property, fluidRangeKey)]
+        }
+      })
+      return utilities
+    }
+    return []
+  }
+
+const rules = [
+  ...buildFlexibleUtilities(),
+  ...buildPredefinedUtilities(),
+]
+
+console.log(rules);
+
+
   return {
     name: 'unocss-preset-fluid',
-    rules: [
-      ...buildUtilities(),
-    ],
+    rules,
   }
 }
