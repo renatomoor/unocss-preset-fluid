@@ -155,7 +155,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
 
   function buildFlexibleFluidUtility(name: string, properties: string | string[]) {
     const matchMultipleProperties = (match, { rawSelector }) => {
-      if (!validateRangeName(match))
+      if (!validateRangeName(match) || !Array.isArray(properties))
         return ''
 
       const { min, max } = getRemMinMax(match)

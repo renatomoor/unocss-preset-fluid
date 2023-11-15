@@ -1,6 +1,7 @@
 import type { Preset } from 'unocss';
-import { FluidRanges } from './main';
-
+export interface Ranges {
+    [key: string]: [number, number];
+}
 export interface PresetFluidOptions {
     /**
      * Min width in pixels where the fluid layout starts.
@@ -34,6 +35,6 @@ export interface PresetFluidOptions {
      * A preset with predefined ranges of fluid spacing
      * @default undefined;
      */
-    fluidRanges?: FluidRanges | null
+    ranges?: Ranges | null;
 }
 export declare function presetFluid(options?: PresetFluidOptions): Preset;
