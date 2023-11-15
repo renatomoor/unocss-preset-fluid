@@ -40,6 +40,12 @@ export interface PresetFluidOptions {
    * @default undefined;
    */
   ranges?: Ranges | null
+
+  /**
+   * Whether to add comment helpers to the generated CSS.
+   * @default false
+   */
+  commentHelpers?: boolean
 }
 
 const defaultOptions: Required<PresetFluidOptions> = {
@@ -50,6 +56,7 @@ const defaultOptions: Required<PresetFluidOptions> = {
   extendMaxWidth: null,
   extendMinWidth: null,
   ranges: null,
+  commentHelpers: false,
 }
 
 export function presetFluid(options?: PresetFluidOptions): Preset {
@@ -153,6 +160,18 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     return true
   }
 
+  function getUtilityComment(name: string, match: RegExpMatchArray) {
+    if (!config.commentHelpers)
+      return ''
+    const predefinedRangeName = match[3] || ''
+    const predefinedRange = config.ranges && config.ranges[predefinedRangeName]
+    const isRem = config.useRemByDefault
+    const min = predefinedRange ? predefinedRange[0] : Number.parseInt(match[1])
+    const max = predefinedRange ? predefinedRange[1] : Number.parseInt(match[2])
+    const unit = isRem ? 'rem' : 'px'
+    return `/* ${min}${unit} -> ${max}${unit} */`
+  }
+
   function buildFlexibleFluidUtility(name: string, properties: string | string[]) {
     const matchMultipleProperties = (match, { rawSelector }) => {
       if (!validateRangeName(match) || !Array.isArray(properties))
@@ -160,11 +179,8 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
 
       const { min, max } = getRemMinMax(match)
       const selector = e(rawSelector)
-      const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)};`).join('\n')
-      return `
-          .${selector} {
-            ${cssProperties}
-          }`
+      const cssProperties = properties.map(property => `${property}:${getClamp(min, max)};`).join('\n')
+      return `${getUtilityComment(name, match)}.${selector}{${cssProperties}}`
     }
     const matchSingleProperty = (match, { rawSelector }) => {
       if (!validateRangeName(match))
@@ -172,11 +188,8 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
 
       const { min, max } = getRemMinMax(match)
       const selector = e(rawSelector)
-      const cssProperty = `${properties}: ${getClamp(min, max)}`
-      return `
-          .${selector} {
-            ${cssProperty};
-          }`
+      const cssProperty = `${properties}:${getClamp(min, max)}`
+      return `${getUtilityComment(name, match)}.${selector}{${cssProperty};}`
     }
 
     if (Array.isArray(properties)) {
