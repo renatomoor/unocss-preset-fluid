@@ -14,9 +14,10 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Guide',
         items: [
           { text: 'Install', link: '/install' },
+          { text: 'Utilities', link: '/utilities' },
           { text: 'Examples', link: '/examples' },
         ],
       },

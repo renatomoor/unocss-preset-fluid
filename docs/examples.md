@@ -1,80 +1,95 @@
-# Unocss Preset Fluid
 
+# UnoCSS Preset Fluid Examples
+
+## Overview
+This page showcases practical examples of using UnoCSS Preset Fluid for various CSS properties like typography, padding, margin, gap, and more.
 
 ## Typography
-<span class="f-text-32-64 leading-[120%] text-amber-500 font-mono">
-    This is an example of a text with a font size from 16px to 32px.
-</span>
+Demonstrating fluid font sizes with UnoCSS Preset Fluid:
 
 ```html
-<span class="f-text-32-64">
-    This is an...
+<span class="f-text-32-64 leading-[120%] text-amber-500 font-mono">
+    This is an example of a text with a font size scaling from 32px to 64px.
 </span>
 ```
 
+### Example:
+<span class="f-text-32-64 leading-[120%] text-amber-500 font-mono">
+    This is an example of a text with a font size scaling from 32px to 64px.
+</span>
 
 ## Padding
-
-<div class="f-p-32-64 bg-green-100/10 rounded">
-    Padding
-</div>
+Example of fluid padding:
 
 ```html
-<span class="f-p-32-64">
-    Padding
-</span>
+<div class="f-p-32-64 f-text-16-25 bg-green-100/10 rounded">
+    Padding example from 32px to 64px.
+</div>
 ```
+
+### Example:
+<div class="f-p-32-64 f-text-16-25 bg-green-100/10 rounded">
+    Padding example from 32px to 64px.
+</div>
 
 ## Margin
-
-<div class="f-m-32-64 bg-green-100/10 rounded">
-    Margin
-</div>
+Showcasing fluid margin application:
 
 ```html
-<span class="f-m-32-64">
-    Margin
-</span>
-```
-
-
-<div class="f-mx-32-64 bg-green-100/10 rounded">
-    Margin X
+<div class="f-m-32-64 f-text-16-25 bg-green-100/10 rounded">
+    Margin example from 32px to 64px.
 </div>
-
-```html
-<span class="f-mx-32-64">
-    Margin X
-</span>
 ```
+
+### Example:
+<div class="f-m-32-64 f-text-16-25 bg-green-100/10 rounded">
+    Margin example from 32px to 64px.
+</div>
 
 ## Gap
-
-<div class="grid grid-cols-3 text-center f-gap-32-64 bg-green-100/10 rounded">
-    <div class="bg-green-500/20">
-        Item 1
-    </div>
-    <div class="bg-green-500/20">
-        Item 2
-    </div>
-    <div class="bg-green-500/20">
-        Item 3
-    </div>
-</div>
+Illustrating fluid gap between grid items:
 
 ```html
-<span class="f-gap-32-64">
-    ...
-</span>
+<div class="grid grid-cols-3 text-center f-gap-32-64 bg-green-100/10 rounded">
+    <div class="bg-green-500/20">Item 1</div>
+    <div class="bg-green-500/20">Item 2</div>
+    <div class="bg-green-500/20">Item 3</div>
+</div>
 ```
+
+### Example:
+<div class="grid grid-cols-3 text-center f-gap-32-64 bg-green-100/10 rounded">
+    <div class="bg-green-500/20">Item 1</div>
+    <div class="bg-green-500/20">Item 2</div>
+    <div class="bg-green-500/20">Item 3</div>
+</div>
 
 ## Ranges
-<div class="f-p-lg bg-green-100/10 rounded">
-    Small Range
-</div>
+Using predefined fluid ranges for padding:
 
 ```html
-<span class="f-p-lg">
-    Small padding range
-</span>
+<div class="f-p-lg f-text-16-25 bg-green-100/10 rounded">
+    Padding example with a small range.
+</div>
 ```
+
+### Example:
+<div class="f-p-lg f-text-16-25 bg-green-100/10 rounded">
+    Padding example with a small range.
+</div>
+
+## Width and Heigth
+Fluidly adjusting width and height:
+
+```html
+<div class="f-w-100-200 f-h-100-200 bg-green-100/10 rounded">
+    100px to 200px.
+</div>
+```
+
+### Example:
+<div class="f-w-100-200 f-h-100-200 bg-green-100/10 rounded">
+    100px to 200px.
+</div>
+
+
