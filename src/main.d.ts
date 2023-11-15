@@ -36,5 +36,10 @@ export interface PresetFluidOptions {
      * @default undefined;
      */
     ranges?: Ranges | null;
+    /**
+     * Whether to add comment helpers to the generated CSS.
+     * @default false
+     */
+    commentHelpers?: boolean;
 }
 export declare function presetFluid(options?: PresetFluidOptions): Preset;
