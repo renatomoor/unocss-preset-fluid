@@ -1,5 +1,10 @@
 import type { Preset } from 'unocss'
 import { e } from 'unocss'
+import { fluidUtilities } from './utilities'
+
+export interface Ranges {
+  [key: string]: [number, number]
+}
 
 export interface PresetFluidOptions {
   /**
@@ -30,6 +35,11 @@ export interface PresetFluidOptions {
    * @default false
    */
   useRemByDefault?: boolean
+  /**
+   * A preset with predefined ranges of fluid spacing
+   * @default undefined;
+   */
+  ranges?: Ranges | null
 }
 
 const defaultOptions: Required<PresetFluidOptions> = {
@@ -39,7 +49,9 @@ const defaultOptions: Required<PresetFluidOptions> = {
   useRemByDefault: false,
   extendMaxWidth: null,
   extendMinWidth: null,
+  ranges: null,
 }
+
 export function presetFluid(options?: PresetFluidOptions): Preset {
   const config = Object.assign({}, defaultOptions, options)
 
@@ -92,9 +104,18 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   /**
    * Returns the min and max values in rem for the given match.
    */
-  function getRemMinMax(match: RegExpMatchArray) {
-    const min = getRemMin(Number.parseInt(match[1]))
-    const max = getRemMax(Number.parseInt(match[2]))
+  function getRemMinMax(match: RegExpMatchArray | string) {
+    let min, max
+    const predefinedRangeName = match[3]
+    if (predefinedRangeName) {
+      min = getRemMin(config.ranges[predefinedRangeName][0])
+      max = getRemMin(config.ranges[predefinedRangeName][1])
+    }
+    else {
+      min = getRemMin(Number.parseInt(match[1]))
+      max = getRemMax(Number.parseInt(match[2]))
+    }
+
     let relativeMin: number | undefined
     let relativemax: number | undefined
     if (config.extendMinWidth)
@@ -122,81 +143,63 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     return slope * (newViewPortSize - originalViewPortMin) + originalMinSize
   }
 
-  function buildFluidUtility(name: string, property: string) {
-    return [new RegExp(`${name}-(\\d+)-(\\d+)`), (match, { rawSelector }) => {
-      const { min, max } = getRemMinMax(match)
-      const selector = e(rawSelector)
-      const cssProperty = `${property}: ${getClamp(min, max)}`
-      return `
-        .${selector} {
-          ${cssProperty};
-        }`
-    }]
+  function validateRangeName(match) {
+    if (match[1] === undefined && match[2] === undefined && match[3] !== undefined) {
+      if (!config.ranges)
+        return false
+      if (!config.ranges[match[3]])
+        return false
+    }
+    return true
   }
 
-  function buildFluidUtilityWithManyProperties(name: string, properties: string[]): any {
-    return [new RegExp(`${name}-(\\d+)-(\\d+)`), (match, { rawSelector }) => {
+  function buildFlexibleFluidUtility(name: string, properties: string | string[]) {
+    const matchMultipleProperties = (match, { rawSelector }) => {
+      if (!validateRangeName(match))
+        return ''
+
       const { min, max } = getRemMinMax(match)
       const selector = e(rawSelector)
       const cssProperties = properties.map(property => `${property}: ${getClamp(min, max)};`).join('\n')
       return `
-        .${selector} {
-          ${cssProperties}
-        }`
-    }]
+          .${selector} {
+            ${cssProperties}
+          }`
+    }
+    const matchSingleProperty = (match, { rawSelector }) => {
+      if (!validateRangeName(match))
+        return ''
+
+      const { min, max } = getRemMinMax(match)
+      const selector = e(rawSelector)
+      const cssProperty = `${properties}: ${getClamp(min, max)}`
+      return `
+          .${selector} {
+            ${cssProperty};
+          }`
+    }
+
+    if (Array.isArray(properties)) {
+      return [
+        [
+          new RegExp(`${name}-(\\d+)-(\\d+)|${name}-(\\w+)`),
+          matchMultipleProperties,
+        ],
+      ]
+    }
+    else {
+      return [
+        [
+          new RegExp(`${name}-(\\d+)-(\\d+)|${name}-(\\w+)`),
+          matchSingleProperty,
+        ],
+      ]
+    }
   }
 
-  const fluidUtilities = {
-    'f-text': 'font-size',
-    'f-w': 'width',
-    'f-w-min': 'min-width',
-    'f-w-max': 'max-width',
-    'f-h': 'height',
-    'f-h-min': 'min-height',
-    'f-h-max': 'max-height',
-    'f-p': 'padding',
-    'f-pt': 'padding-top',
-    'f-pb': 'padding-bottom',
-    'f-pl': 'padding-left',
-    'f-px': ['padding-left', 'padding-right'],
-    'f-py': ['padding-top', 'padding-bottom'],
-    'f-m': 'margin',
-    'f-mt': 'margin-top',
-    'f-mb': 'margin-bottom',
-    'f-ml': 'margin-left',
-    'f-mx': ['margin-left', 'margin-right'],
-    'f-my': ['margin-top', 'margin-bottom'],
-    'f-gap': 'gap',
-    'f-gap-x': 'column-gap',
-    'f-gap-y': 'row-gap',
-    'f-indent': 'text-indent',
-    'f-scroll-m': 'scroll-margin',
-    'f-scroll-mt': 'scroll-margin-top',
-    'f-scroll-mb': 'scroll-margin-bottom',
-    'f-scroll-ml': 'scroll-margin-left',
-    'f-scroll-mr': 'scroll-margin-right',
-    'f-scroll-mx': ['scroll-margin-left', 'scroll-margin-right'],
-    'f-scroll-my': ['scroll-margin-top', 'scroll-margin-bottom'],
-    'f-scroll-ms': 'scroll-margin-inline-start',
-    'f-scroll-me': 'scroll-margin-inline-end',
-    'f-scroll-p': 'scroll-padding',
-    'f-scroll-pt': 'scroll-padding-top',
-    'f-scroll-pb': 'scroll-padding-bottom',
-    'f-scroll-pl': 'scroll-padding-left',
-    'f-scroll-pr': 'scroll-padding-right',
-    'f-scroll-px': ['scroll-padding-left', 'scroll-padding-right'],
-    'f-scroll-py': ['scroll-padding-top', 'scroll-padding-bottom'],
-    'f-scroll-ps': 'scroll-padding-inline-start',
-    'f-scroll-pe': 'scroll-padding-inline-end',
-    'f-leading': 'line-height',
-  }
-
-  function buildUtilities() {
+  function buildFlexibleUtilities() {
     const utilities = Object.entries(fluidUtilities).flatMap(([name, property]) => {
-      if (Array.isArray(property))
-        return [buildFluidUtilityWithManyProperties(name, property)]
-      else
-        return [buildFluidUtility(name, property)]
+      return buildFlexibleFluidUtility(name, property)
     })
     return utilities
   }
@@ -204,7 +207,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   return {
     name: 'unocss-preset-fluid',
     rules: [
-      ...buildUtilities(),
-    ],
+      ...buildFlexibleUtilities(),
+    ] as any,
   }
 }
