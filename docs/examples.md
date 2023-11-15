@@ -37,6 +37,17 @@
 </span>
 ```
 
+
+<div class="f-mx-32-64 bg-green-100/10 rounded">
+    Margin X
+</div>
+
+```html
+<span class="f-mx-32-64">
+    Margin X
+</span>
+```
+
 ## Gap
 
 <div class="grid grid-cols-3 text-center f-gap-32-64 bg-green-100/10 rounded">
@@ -52,7 +63,18 @@
 </div>
 
 ```html
-<span class="f-m-32-64">
-    Margin
+<span class="f-gap-32-64">
+    ...
+</span>
+```
+
+## Ranges
+<div class="f-p-lg bg-green-100/10 rounded">
+    Small Range
+</div>
+
+```html
+<span class="f-p-lg">
+    Small padding range
 </span>
 ```

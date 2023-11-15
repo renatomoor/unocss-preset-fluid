@@ -40,7 +40,7 @@ Example:
     extendMinWidth: null,
     remBase: 16,
     useRemByDefault: false,
-    fluidRanges: null,
+    ranges: null,
 }
 ```
 
@@ -70,7 +70,7 @@ For example
 <div class="f-w-1-2">...</div> <!-- RemByDefault from 1rem to 2rem -->
 ```
 
-#### FluidRanges
+#### Ranges
 This option allows you to define recurring spacings using predefined names.
 For example. With this fluid ranges:
 ```js
