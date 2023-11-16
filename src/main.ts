@@ -1,5 +1,4 @@
 import type { Preset } from 'unocss'
-import { e } from 'unocss'
 import { fluidUtilities } from './utilities'
 
 export interface Ranges {
@@ -169,27 +168,34 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     const min = predefinedRange ? predefinedRange[0] : Number.parseInt(match[1])
     const max = predefinedRange ? predefinedRange[1] : Number.parseInt(match[2])
     const unit = isRem ? 'rem' : 'px'
-    return `/* ${min}${unit} -> ${max}${unit} */`
+    return ` /* ${min}${unit} -> ${max}${unit} */`
   }
 
   function buildFlexibleFluidUtility(name: string, properties: string | string[]) {
-    const matchMultipleProperties = (match, { rawSelector }) => {
+    const matchMultipleProperties = (match) => {
       if (!validateRangeName(match) || !Array.isArray(properties))
         return ''
 
       const { min, max } = getRemMinMax(match)
-      const selector = e(rawSelector)
-      const cssProperties = properties.map(property => `${property}:${getClamp(min, max)};`).join('\n')
-      return `${getUtilityComment(name, match)}.${selector}{${cssProperties}}`
+
+      const selectors = {}
+
+      properties.forEach((property) => {
+        selectors[property] = getClamp(min, max) + getUtilityComment(name, match)
+      })
+      return {
+        ...selectors,
+      }
     }
-    const matchSingleProperty = (match, { rawSelector }) => {
+    const matchSingleProperty = (match) => {
       if (!validateRangeName(match))
         return ''
 
       const { min, max } = getRemMinMax(match)
-      const selector = e(rawSelector)
-      const cssProperty = `${properties}:${getClamp(min, max)}`
-      return `${getUtilityComment(name, match)}.${selector}{${cssProperty};}`
+
+      return {
+        [`${properties}`]: getClamp(min, max) + getUtilityComment(name, match),
+      }
     }
 
     if (Array.isArray(properties)) {
