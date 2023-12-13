@@ -1,5 +1,12 @@
 
 
+## [0.1.6](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.5...0.1.6) (2023-12-13)
+
+
+### 🪲 Bug Fixes
+
+* refactor key naming in utilities ([472ebb8](https://github.com/renatomoor/unocss-preset-fluid/commit/472ebb83024619fe264afabbf3b3f0cbfe0cf6a1))
+
 ## [0.1.5](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.4...0.1.5) (2023-12-13)
 
 
