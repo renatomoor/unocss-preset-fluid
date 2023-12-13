@@ -1,0 +1,49 @@
+{
+  "github": {
+    "release": true,
+    "releaseName": "Release ${version}"
+  },
+  "hooks": {
+    "before:init": [
+      "git fetch --prune --prune-tags origin"
+    ]
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          {
+            "type": "feat",
+            "section": "✨ Features"
+          },
+          {
+            "type": "fix",
+            "section": "🪲 Bug Fixes"
+          },
+          {
+            "type": "docs",
+            "section": "📂 Documentation"
+          },
+          {
+            "type": "style",
+            "section": "🎨 Style"
+          },
+          {
+            "type": "chore",
+            "section": "⚙️ Chore"
+          },
+          {
+            "type": "test",
+            "section": "🧪 Test"
+          },
+          {
+            "type": "ci",
+            "section": "🔧 CI"
+          }
+        ]
+      },
+      "infile": "CHANGELOG.md"
+    }
+  }
+}
