@@ -104,7 +104,18 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   }
 
   function getClamp(min: number, max: number) {
-    return `clamp(${min}rem, ${getIntersection(min, getSlope(min, max), getRemMinWidth()).toFixed(4)}rem + ${getSlopeForClamp(min, max).toFixed(4)}vw, ${max}rem)`
+    if (max > min)
+      return `clamp(${min}rem, ${getIntersection(min, getSlope(min, max), getRemMinWidth()).toFixed(4)}rem + ${getSlopeForClamp(min, max).toFixed(4)}vw, ${max}rem)`
+
+    return `clamp(${max}rem, ${getIntersection(min, getSlope(min, max), getRemMinWidth()).toFixed(4)}rem + ${getSlopeForClamp(min, max).toFixed(4)}vw, ${min}rem)`
+  }
+
+  function castValueFromRegexMatch(value: string) {
+    if (!value)
+      return 0
+    if (value.includes('-'))
+      return Number.parseInt(value.replace('-', ''))
+    return -Number.parseInt(value)
   }
 
   /**
@@ -112,26 +123,26 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
    */
   function getRemMinMax(match: RegExpMatchArray | string) {
     let min, max
-    const predefinedRangeName = match[3]
+
+    const predefinedRangeName = match[5]
+    min = getRemMin(castValueFromRegexMatch(match[1]))
+    max = getRemMax(castValueFromRegexMatch(match[2]))
+
     if (predefinedRangeName) {
       min = getRemMin(config.ranges[predefinedRangeName][0])
-      max = getRemMin(config.ranges[predefinedRangeName][1])
-    }
-    else {
-      min = getRemMin(Number.parseInt(match[1]))
-      max = getRemMax(Number.parseInt(match[2]))
+      max = getRemMax(config.ranges[predefinedRangeName][1])
     }
 
     let relativeMin: number | undefined
-    let relativemax: number | undefined
+    let relativeMax: number | undefined
     if (config.extendMinWidth)
       relativeMin = calculateRelativeFontSize(config.minWidth, min, max, config.maxWidth, config.extendMinWidth)
     if (config.extendMaxWidth)
-      relativemax = calculateRelativeFontSize(config.minWidth, min, max, config.maxWidth, config.extendMaxWidth)
+      relativeMax = calculateRelativeFontSize(config.minWidth, min, max, config.maxWidth, config.extendMaxWidth)
 
     return {
       min: relativeMin || min,
-      max: relativemax || max,
+      max: relativeMax || max,
     }
   }
 
@@ -198,10 +209,16 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
       }
     }
 
+    const regexPattersNumericValues = `^${name}(?:--)?(-?\\d+)?(?:--)?(-?\\d+)?$`
+    const regexPattersRangeValues = `^${name}((?:--)?(-?\\d+))?(?:-([a-z]+))?$`
+
+    const regexPattern = `${regexPattersNumericValues}|${regexPattersRangeValues}`
+    const regex = new RegExp(regexPattern)
+
     if (Array.isArray(properties)) {
       return [
         [
-          new RegExp(`${name}-(\\d+)-(\\d+)|${name}-(\\w+)`),
+          regex,
           matchMultipleProperties,
         ],
       ]
@@ -209,7 +226,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     else {
       return [
         [
-          new RegExp(`${name}-(\\d+)-(\\d+)|${name}-(\\w+)`),
+          regex,
           matchSingleProperty,
         ],
       ]
