@@ -1,101 +1,27 @@
 <script setup>
-import NegativeValues from './components/NegativeValues.vue'
-import NegativePositiveValues from './components/NegativePositiveValues.vue'
+import NegativeValues from './components/NegativeValues.vue';
+import NegativePositiveValues from './components/NegativePositiveValues.vue';
+import Typography from './components/Typography.vue';
+import Padding from './components/Padding.vue';
+import Margin from './components/Margin.vue';
+import Gap from './components/Gap.vue';
+import Ranges from './components/Ranges.vue';
+import WidthHeight from './components/WidthHeight.vue';
 </script>
 
 # UnoCSS Preset Fluid Examples
 
 ## Overview
-This page showcases practical examples of using UnoCSS Preset Fluid for various CSS properties like typography, padding, margin, gap, and more.
+This page showcases practical examples of using UnoCSS Preset 
+Fluid for various CSS properties like typography, padding, 
+margin, gap, and more.
 
-## Typography
-Demonstrating fluid font sizes with UnoCSS Preset Fluid:
 
-```html
-<span class="f-text-32-64 leading-[120%] text-indigo-8 font-mono">
-    This is an example of a text with a font size scaling from 32px to 64px.
-</span>
-```
-
-### Example:
-<span class="f-text-32-64 leading-[120%] text-indigo-8 font-mono">
-    This is an example of a text with a font size scaling from 32px to 64px.
-</span>
-
-## Padding
-Example of fluid padding:
-
-```html
-<div class="f-p-32-64 f-text-16-25 bg-gray-800 rounded">
-    Padding example from 32px to 64px.
-</div>
-```
-
-### Example:
-<div class="f-p-32-64 f-text-16-25 bg-gray-800 rounded">
-    Padding example from 32px to 64px.
-</div>
-
-## Margin
-Showcasing fluid margin application:
-
-```html
-<div class="f-m-32-64 f-text-16-25 bg-gray-800 rounded">
-    Margin example from 32px to 64px.
-</div>
-```
-
-### Example:
-<div class="f-m-32-64 f-text-16-25 bg-gray-800 rounded">
-    Margin example from 32px to 64px.
-</div>
-
-## Gap
-Illustrating fluid gap between grid items:
-
-```html
-<div class="grid grid-cols-3 text-center f-gap-32-64 bg-gray-800 rounded">
-    <div class="bg-green-500/20">Item 1</div>
-    <div class="bg-green-500/20">Item 2</div>
-    <div class="bg-green-500/20">Item 3</div>
-</div>
-```
-
-### Example:
-<div class="grid grid-cols-3 text-center f-gap-32-64 bg-gray-800 rounded">
-    <div class="bg-green-500/20">Item 1</div>
-    <div class="bg-green-500/20">Item 2</div>
-    <div class="bg-green-500/20">Item 3</div>
-</div>
-
-## Ranges
-Using predefined fluid ranges for padding:
-
-```html
-<div class="f-p-lg f-text-16-25 bg-gray-800 rounded">
-    Padding example with a small range.
-</div>
-```
-
-### Example:
-<div class="f-p-lg f-text-16-25 bg-gray-800 rounded">
-    Padding example with a small range.
-</div>
-
-## Width and Heigth
-Fluidly adjusting width and height:
-
-```html
-<div class="f-w-100-200 f-h-100-200 bg-gray-800 rounded">
-    100px to 200px.
-</div>
-```
-
-### Example:
-<div class="f-w-100-200 f-h-100-200 bg-gray-800 rounded">
-    100px to 200px.
-</div>
-
+<!--@include: ./examples/typography.md-->
+<!--@include: ./examples/padding.md-->
+<!--@include: ./examples/margin.md-->
+<!--@include: ./examples/gap.md-->
+<!--@include: ./examples/ranges.md-->
+<!--@include: ./examples/width-height.md-->
 <!--@include: ./examples/negative-values.md-->
-
 <!--@include: ./examples/negative-positive-values.md-->
