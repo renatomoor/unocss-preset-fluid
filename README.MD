@@ -79,13 +79,12 @@ You will be able to use it as aliases. Therefore, `f-w-xs` will become `f-w-12-1
 #### CommentHelpers
 This option allows you to add comments to the generated css.
 After setting this to true, you will be able to see the generated css in the browser inspector.
-```css{1,5}
-/* 20px -> 50px */ <-- This is the comment
+```css
 .f-p-lg {
-  padding: clamp(1.25rem, 0.5898rem + 2.8169vw, 3.125rem);
+  padding: clamp(1.25rem, 0.5898rem + 2.8169vw, 3.125rem); /* 20px -> 50px */
 }
-/* 32px -> 64px */ <-- This is the comment
+
 .f-p-32-64 {
-  padding: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
+  padding: clamp(2rem, 1.2958rem + 3.0047vw, 4rem); /* 32px -> 64px */
 }
 ```
