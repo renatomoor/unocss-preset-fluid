@@ -34,14 +34,15 @@
     "docs:preview": "vitepress preview docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "build": "tsc && vite build",
-    "release": "pnpm build && release-it"
+    "build": "tsc && vite build && api-extractor run",
+    "release": "release-it"
   },
   "dependencies": {
     "vue": "^3.3.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^1.1.0",
+    "@microsoft/api-extractor": "^7.38.3",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.9.0",
     "eslint": "^8.53.0",
