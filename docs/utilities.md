@@ -42,3 +42,11 @@
 | `f-scroll-pl` | `f-scroll-pl-32-64` | scroll padding left                          |
 | `f-scroll-px` | `f-scroll-px-32-64` | scroll padding left and scroll padding right |
 | `f-scroll-py` | `f-scroll-py-32-64` | scroll padding top and scroll padding bottom |
+| `f-top`       | `f-top-32-64`       | top                                          |
+| `f-right`     | `f-right-32-64`     | right                                        |
+| `f-bottom`    | `f-bottom-32-64`    | bottom                                       |
+| `f-left`      | `f-left-32-64`      | left                                         |
+| `f-inset`     | `f-inset-32-64`     | inset                                        |
+| `f-inset-x`   | `f-inset-x-32-64`   | left and right                               |
+| `f-inset-y`   | `f-inset-y-32-64`   | top and bottom                               |
+
