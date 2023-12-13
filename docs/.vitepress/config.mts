@@ -21,6 +21,19 @@ export default defineConfig({
           { text: 'Examples', link: '/examples' },
         ],
       },
+      {
+        text: 'Examples',
+        items: [
+          { text: 'Gap', link: '/examples/gap' },
+          { text: 'Margin', link: '/examples/margin' },
+          { text: 'Negative and positive', link: '/examples/negative-positive-values' },
+          { text: 'Negative Values', link: '/examples/negative-values' },
+          { text: 'Padding', link: '/examples/padding' },
+          { text: 'Ranges', link: '/examples/ranges' },
+          { text: 'Typography', link: '/examples/typography' },
+          { text: 'Width and height', link: '/examples/width-height' },
+        ],
+      },
     ],
 
     socialLinks: [

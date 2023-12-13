@@ -1,4 +1,8 @@
-## Gap
+<script setup>
+import Gap from '../components/Gap.vue';
+</script>
+
+# Gap
 Illustrating fluid gap between grid items:
 
 ```html

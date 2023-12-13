@@ -1,4 +1,8 @@
-## Padding
+<script setup>
+import Padding from '../components/Padding.vue';
+</script>
+
+# Padding
 Example of fluid padding:
 
 ```html

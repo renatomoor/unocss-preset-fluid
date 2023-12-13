@@ -1,4 +1,8 @@
-## Typography
+<script setup>
+import Typography from '../components/Typography.vue';
+</script>
+
+# Typography
 Demonstrating fluid font sizes with UnoCSS Preset Fluid:
 
 ```html

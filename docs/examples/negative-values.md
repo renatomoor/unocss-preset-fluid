@@ -1,4 +1,8 @@
-## Negative values
+<script setup>
+import NegativeValues from '../components/NegativeValues.vue';
+</script>
+
+# Negative values
 Fluidly adjusting width and height:
 
 ```html{2}

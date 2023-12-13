@@ -1,4 +1,8 @@
-## Negative and positive values
+<script setup>
+import NegativePositiveValues from '../components/NegativePositiveValues.vue';
+</script>
+
+# Negative and positive values
 
 In order to use negative values you need to use a doble dash `--` to separate the values.
 

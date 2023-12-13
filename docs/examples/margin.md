@@ -1,4 +1,8 @@
-## Margin
+<script setup>
+import Margin from '../components/Margin.vue';
+</script>
+
+# Margin
 Showcasing fluid margin application:
 
 ```html

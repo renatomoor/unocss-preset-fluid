@@ -1,4 +1,8 @@
-## Width and Height
+<script setup>
+import WidthHeight from '../components/WidthHeight.vue';
+</script>
+
+# Width and Height
 Fluidly adjusting width and height:
 
 ```html

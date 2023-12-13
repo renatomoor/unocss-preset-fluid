@@ -1,4 +1,8 @@
-## Ranges
+<script setup>
+import Ranges from '../components/Ranges.vue';
+</script>
+
+# Ranges
 Using predefined fluid ranges for padding:
 
 ```js{8}
