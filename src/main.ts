@@ -161,10 +161,10 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   }
 
   function validateRangeName(match) {
-    if (match[1] === undefined && match[2] === undefined && match[3] !== undefined) {
+    if (match[1] === undefined && match[2] === undefined && match[3] !== undefined && match[4] !== undefined) {
       if (!config.ranges)
         return false
-      if (!config.ranges[match[3]])
+      if (!config.ranges[match[5]])
         return false
     }
     return true
@@ -173,7 +173,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   function getUtilityComment(name: string, match: RegExpMatchArray) {
     if (!config.commentHelpers)
       return ''
-    const predefinedRangeName = match[3] || ''
+    const predefinedRangeName = match[5] || ''
     const predefinedRange = config.ranges && config.ranges[predefinedRangeName]
     const isRem = config.useRemByDefault
     const min = predefinedRange ? predefinedRange[0] : Number.parseInt(match[1])
