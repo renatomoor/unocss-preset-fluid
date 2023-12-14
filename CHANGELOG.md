@@ -1,5 +1,13 @@
 
 
+## [0.1.8](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.7...0.1.8) (2023-12-14)
+
+
+### 🪲 Bug Fixes
+
+* comments helper for ranges ([7dbcddb](https://github.com/renatomoor/unocss-preset-fluid/commit/7dbcddb841f04f04ef57caa09a9076027320e439))
+* validation and regexPattersRangeValues ([e0f0577](https://github.com/renatomoor/unocss-preset-fluid/commit/e0f0577a94a944bf545f3d99791768f1b47602ba))
+
 ## [0.1.7](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.6...0.1.7) (2023-12-14)
 
 ## [0.1.6](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.5...0.1.6) (2023-12-13)
