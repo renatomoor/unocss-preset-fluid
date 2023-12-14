@@ -124,7 +124,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   function getRemMinMax(match: RegExpMatchArray | string) {
     let min, max
 
-    const predefinedRangeName = match[5]
+    const predefinedRangeName = match[4]
     min = getRemMin(castValueFromRegexMatch(match[1]))
     max = getRemMax(castValueFromRegexMatch(match[2]))
 
@@ -160,12 +160,18 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     return slope * (newViewPortSize - originalViewPortMin) + originalMinSize
   }
 
-  function validateRangeName(match) {
-    if (match[1] === undefined && match[2] === undefined && match[3] !== undefined && match[4] !== undefined) {
-      if (!config.ranges)
-        return false
-      if (!config.ranges[match[5]])
-        return false
+  function validateUtilityName(match) {
+    if (!match[4] && match[1] && match[2])
+      return true
+
+    if (!config.ranges) {
+      console.warn(`[unocss-preset-fluid] (${match[0]}) Trying to use predefined range ${match[4]} but no ranges are defined.`)
+      return false
+    }
+
+    if (!config.ranges[match[4]]) {
+      console.warn(`[unocss-preset-fluid] (${match[0]}) Trying to use predefined range ${match[4]} but it is not defined in ranges.`)
+      return false
     }
     return true
   }
@@ -173,18 +179,18 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
   function getUtilityComment(name: string, match: RegExpMatchArray) {
     if (!config.commentHelpers)
       return ''
-    const predefinedRangeName = match[5] || ''
+    const predefinedRangeName = match[4] || ''
     const predefinedRange = config.ranges && config.ranges[predefinedRangeName]
     const isRem = config.useRemByDefault
-    const min = predefinedRange ? predefinedRange[0] : Number.parseInt(match[1])
-    const max = predefinedRange ? predefinedRange[1] : Number.parseInt(match[2])
+    const min = predefinedRange ? predefinedRange[0] : -Number.parseInt(match[1])
+    const max = predefinedRange ? predefinedRange[1] : -Number.parseInt(match[2])
     const unit = isRem ? 'rem' : 'px'
     return ` /* ${min}${unit} -> ${max}${unit} */`
   }
 
   function buildFlexibleFluidUtility(name: string, properties: string | string[]) {
     const matchMultipleProperties = (match) => {
-      if (!validateRangeName(match) || !Array.isArray(properties))
+      if (!validateUtilityName(match) || !Array.isArray(properties))
         return ''
 
       const { min, max } = getRemMinMax(match)
@@ -199,7 +205,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
       }
     }
     const matchSingleProperty = (match) => {
-      if (!validateRangeName(match))
+      if (!validateUtilityName(match))
         return ''
 
       const { min, max } = getRemMinMax(match)
@@ -210,7 +216,7 @@ export function presetFluid(options?: PresetFluidOptions): Preset {
     }
 
     const regexPattersNumericValues = `^${name}(?:--)?(-?\\d+)?(?:--)?(-?\\d+)?$`
-    const regexPattersRangeValues = `^${name}((?:--)?(-?\\d+))?(?:-([a-z]+))?$`
+    const regexPattersRangeValues = `^${name}(?:--)?(-?\\d+)?(?:-([a-zA-Z0-9]+))?$`
 
     const regexPattern = `${regexPattersNumericValues}|${regexPattersRangeValues}`
     const regex = new RegExp(regexPattern)
