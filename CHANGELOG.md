@@ -1,5 +1,7 @@
 
 
+## [1.0.0](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.8...1.0.0) (2023-12-19)
+
 ## [0.1.8](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.7...0.1.8) (2023-12-14)
 
 
