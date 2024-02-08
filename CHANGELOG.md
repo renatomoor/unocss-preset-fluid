@@ -1,5 +1,12 @@
 
 
+## [1.0.2](https://github.com/renatomoor/unocss-preset-fluid/compare/1.0.1...1.0.2) (2024-02-08)
+
+
+### 🪲 Bug Fixes
+
+* add missing build ([8f53b9e](https://github.com/renatomoor/unocss-preset-fluid/commit/8f53b9e070beed29a25b0b5d98d59f1c12ae93be))
+
 ## [1.0.1](https://github.com/renatomoor/unocss-preset-fluid/compare/1.0.0...1.0.1) (2024-02-08)
 
 
