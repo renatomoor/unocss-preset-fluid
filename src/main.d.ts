@@ -1,14 +1,7 @@
 import type { Preset } from 'unocss';
-/**
- * @public
- */
 export interface Ranges {
     [key: string]: [number, number];
 }
-/**
- * @public
- * @default { minWidth: 375, maxWidth: 1440, remBase: 16, useRemByDefault: false }
- */
 export interface PresetFluidOptions {
     /**
      * Min width in pixels where the fluid layout starts.

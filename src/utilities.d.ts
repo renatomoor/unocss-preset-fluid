@@ -10,12 +10,14 @@ export declare const fluidUtilities: {
     'f-pt': string;
     'f-pb': string;
     'f-pl': string;
+    'f-pr': string;
     'f-px': string[];
     'f-py': string[];
     'f-m': string;
     'f-mt': string;
     'f-mb': string;
     'f-ml': string;
+    'f-mr': string;
     'f-mx': string[];
     'f-my': string[];
     'f-gap': string;
