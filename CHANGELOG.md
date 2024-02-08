@@ -1,5 +1,12 @@
 
 
+## [1.0.1](https://github.com/renatomoor/unocss-preset-fluid/compare/1.0.0...1.0.1) (2024-02-08)
+
+
+### 🪲 Bug Fixes
+
+* add missing utilities for pr and mr ([4f515e6](https://github.com/renatomoor/unocss-preset-fluid/commit/4f515e602ad996682aad8961004472a6c45e66ba))
+
 ## [1.0.0](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.8...1.0.0) (2023-12-19)
 
 ## [0.1.8](https://github.com/renatomoor/unocss-preset-fluid/compare/0.1.7...0.1.8) (2023-12-14)
