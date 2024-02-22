@@ -42,4 +42,11 @@ export interface PresetFluidOptions {
      */
     commentHelpers?: boolean;
 }
+/**
+ * @internal
+ */
+export declare const defaultOptions: Required<PresetFluidOptions>;
+/**
+ * @public
+ */
 export declare function presetFluid(options?: PresetFluidOptions): Preset;

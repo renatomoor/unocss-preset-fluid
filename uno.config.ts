@@ -5,7 +5,7 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetFluid({
-      addCommentHelpers: true,
+      commentHelpers: true,
       ranges: {
         'xs': [5, 15],
         'sm': [10, 30],

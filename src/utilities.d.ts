@@ -43,4 +43,11 @@ export declare const fluidUtilities: {
     'f-scroll-ps': string;
     'f-scroll-pe': string;
     'f-leading': string;
+    'f-top': string;
+    'f-right': string;
+    'f-bottom': string;
+    'f-left': string;
+    'f-inset': string;
+    'f-inset-x': string[];
+    'f-inset-y': string[];
 };

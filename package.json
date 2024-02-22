@@ -1,7 +1,7 @@
 {
   "name": "unocss-preset-fluid",
   "type": "module",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "description": "A fluid preset for unocss",
   "author": "Renato Moor <renatomoor1@gmail.com>",
   "license": "MIT",
@@ -35,7 +35,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsc && vite build && api-extractor run",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "vue": "^3.3.8"
@@ -45,11 +48,15 @@
     "@microsoft/api-extractor": "^7.38.3",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.9.0",
+    "@vitest/coverage-istanbul": "^1.0.4",
+    "@vitest/coverage-v8": "^1.0.4",
+    "@vitest/ui": "^1.0.4",
     "eslint": "^8.53.0",
     "release-it": "^17.0.0",
     "typescript": "^5.2.2",
     "unocss": "^0.57.3",
     "vite": "^4.5.0",
-    "vitepress": "1.0.0-rc.25"
+    "vitepress": "latest",
+    "vitest": "^1.0.4"
   }
 }

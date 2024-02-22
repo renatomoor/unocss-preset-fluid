@@ -325,4 +325,6 @@ $RECYCLE.BIN/
 # build type files
 temp
 
-.vitepress/cache/
+
+.docs/.vitepress/cache/
+.html

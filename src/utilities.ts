@@ -43,4 +43,11 @@ export const fluidUtilities = {
   'f-scroll-ps': 'scroll-padding-inline-start',
   'f-scroll-pe': 'scroll-padding-inline-end',
   'f-leading': 'line-height',
+  'f-top': 'top',
+  'f-right': 'right',
+  'f-bottom': 'bottom',
+  'f-left': 'left',
+  'f-inset': 'inset',
+  'f-inset-x': ['left', 'right'],
+  'f-inset-y': ['top', 'bottom'],
 }
