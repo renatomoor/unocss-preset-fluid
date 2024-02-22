@@ -1,21 +1,23 @@
 export declare const fluidUtilities: {
     'f-text': string;
     'f-w': string;
-    'f-w-min': string;
-    'f-w-max': string;
+    'f-min-w': string;
+    'f-max-w': string;
     'f-h': string;
-    'f-h-min': string;
-    'f-h-max': string;
+    'f-min-h': string;
+    'f-max-h': string;
     'f-p': string;
     'f-pt': string;
     'f-pb': string;
     'f-pl': string;
+    'f-pr': string;
     'f-px': string[];
     'f-py': string[];
     'f-m': string;
     'f-mt': string;
     'f-mb': string;
     'f-ml': string;
+    'f-mr': string;
     'f-mx': string[];
     'f-my': string[];
     'f-gap': string;
