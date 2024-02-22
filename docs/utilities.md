@@ -26,7 +26,7 @@
 | `f-gap`       | `f-gap-32-64`       | gap                                          |
 | `f-gap-x`     | `f-gap-x-32-64`     | gap left and gap right                       |
 | `f-gap-y`     | `f-gap-y-32-64`     | gap top and gap bottom                       |
-| `f-intent`    | `f-intent-32-64`    | text intent                                  |
+| `f-indent`    | `f-indent-32-64`    | text intent                                  |
 | `f-leading`   | `f-leading-32-64`   | line height                                  |
 | `f-scroll-m`  | `f-scroll-m-32-64`  | scroll margin                                |
 | `f-scroll-mt` | `f-scroll-mt-32-64` | scroll margin top                            |
