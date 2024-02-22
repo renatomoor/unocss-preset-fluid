@@ -326,5 +326,7 @@ $RECYCLE.BIN/
 temp
 
 
-.docs/.vitepress/cache/
+docs/.vitepress/cache/**
+
 .html
+
